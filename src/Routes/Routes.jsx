@@ -10,6 +10,7 @@ import MyFood from "../Pages/MyFood/MyFood";
 import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
 import PrivateRoute from "./PrivateRoute";
 import FoodDetails from "../Pages/FoodDetails/FoodDetails";
+import UpdateFoodModal from "../Pages/MyFood/UpdateFoodModal";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/food/:id",
-        element: <FoodDetails />,
+        element:<PrivateRoute> <FoodDetails /> </PrivateRoute>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/food/${params.id}`),
       },
@@ -57,6 +58,12 @@ const router = createBrowserRouter([
         ),
         // loader: ({ params }) =>
         //   fetch(`http://localhost:5000/food?email=${params.email}`),
+      },
+      {
+        path: "/updateFoodModal/:id",
+        element:<PrivateRoute> <UpdateFoodModal></UpdateFoodModal> </PrivateRoute>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/food/${params.id}`),
       },
       {
         path: "/addFood",

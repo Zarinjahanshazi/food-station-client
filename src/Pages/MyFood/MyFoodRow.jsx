@@ -1,88 +1,75 @@
-import { CiEdit } from "react-icons/ci";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const MyFoodRow = ({ food, handleDelete, handleUpdate }) => {
+const MyFoodRow = ({ food }) => {
+
   const {
-    food_name,
     _id,
-    pickup_location,
-    expired_datetime,
     additional_notes,
+    email,
+    expired_datetime,
+    food_name,
+    food_quantity,
+    food_status,
+    name,
+    pickup_location,
   } = food;
+  console.log(food);
 
+  const handleDelete = _id => {
+    console.log(_id);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+         fetch(`http://localhost:5000/food/${_id}`,{
+            method: 'DELETE'
+         })
+         .then(res => res.json())
+         .then(data => {
+            if(data.deletedCount > 0) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your item has been deleted.',
+                    'success'
+                  )
+                  .then((result) =>{
+                    if(result.isConfirmed){
+                      window.location.reload();
+                    }
+                  })
+                  
+                  // const remain = myOrder.filter(cart => cart._id !== _id);
+                  // console.log(remain);
+                  // setMyOrder(remain);
+            }
+         })
+        }
+      })
+}
   return (
     <tr>
-      <th></th>
       <td>{food_name}</td>
+      <td>{email}</td>
+      <td>{name}</td>
+      <td>{food_status}</td>
+      <td>{food_quantity}</td>
+      <td>{pickup_location}</td>
+      <td>{expired_datetime}</td>
+      <td>{additional_notes}</td>
       <td>
-        <button
-          // eslint-disable-next-line react/jsx-no-duplicate-props
-          onClick={() => document.getElementById("my_modal_3").showModal()}
-        >
-          <CiEdit />
-        </button>
-        <dialog id="my_modal_3" className="modal">
-          <div className="modal-box">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-            <input
-              type="text"
-              defaultValue={food_name}
-              placeholder="Type here"
-              className="input  input-bordered input-warning w-full max-w-xs"
-            />
-
-            <input
-              type="text"
-              disabled
-              defaultValue={pickup_location}
-              placeholder="Type here"
-              className="input input-bordered input-warning w-full max-w-xs"
-            />
-
-            <input
-              type="text"
-              disabled
-              defaultValue={expired_datetime}
-              placeholder="Type here"
-              className="input input-bordered input-warning w-full max-w-xs"
-            />
-            <input
-              type="text"
-              defaultValue={additional_notes}
-              placeholder="Additional Notes"
-              className="input input-bordered input-warning w-full max-w-xs"
-            />
-            <button
-              className="btn btn-outline btn-warning"
-              onClick={() => handleUpdate(_id)}
-            >
-              UPDATE
-            </button>
-          </div>
-        </dialog>
-      </td>
-      <td>
-        <button onClick={() => handleDelete(_id)} className="btn btn-square">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </td>
+                <Link to={`/updateFoodModal/${_id}`}><button className="btn">Update</button></Link>
+            </td>
+            <td>
+                <button onClick={() => handleDelete(_id)} className="btn">Delete</button>
+            </td>
     </tr>
   );
 };
