@@ -87,19 +87,27 @@ const Navbar = () => {
                 />
               </svg>
             </label>
+            
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               {links}
             </ul>
+            
+        
           </div>
+          <p className="text-black mx-2 font-extrabold text-xl">Foodle</p>
           <div>
             <Link>
           
             <img className="h-[80px] rounded-full" src={logo} alt="" />
             {/* <h2 className="text-xl font-semibold text-orange-500 hidden md:block">Bangla Bites</h2> */}
           </Link>
+          
+          </div>
+          <div>
+          
           </div>
           {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
         </div>

@@ -8,6 +8,7 @@ import auth from "../../Firebase/firebase.config";
 import Meta from "../Shared/Meta";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -39,6 +40,7 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
         setError("Invalid email or password! please try again");
+        toast.error("Invalid email or password! please try again")
       });
   };
 
@@ -50,12 +52,13 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-
+        toast.success("User Login successfully!")
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         console.error(error);
         setError(error.message);
+        toast.error("Something went wrong!")
       });
   };
   return (

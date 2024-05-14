@@ -9,7 +9,7 @@ const UpdateFoodModal = () => {
   const [load, setLoad] = useState(true);
 
   useEffect(() => {
-      fetch('https://b8a11-server-side-turzacse.vercel.app/allfoods')
+      fetch('http://localhost:5000/food')
           .then(res => res.json())
           .then(data => {
               const one = data.find(f => f._id === id);
@@ -22,19 +22,19 @@ const UpdateFoodModal = () => {
           });
   }, [id]);
   //console.log(food);
-  const {_id,foodName, foodCategory, quantity, origin, description, price} = food || [];
+  const {_id,food_name, pickup_location, food_quantity, additional_notes, } = food || [];
 
   const handleUpdate = e => {
       e.preventDefault();
       const form = e.target;
-      const foodName =form.name.value;
-      const foodCategory = form.category.value;
-      const quantity = form.quantity.value;
-      const origin = form.origin.value;
-      const description = form.description.value;
-      const price = form.price.value;
+      const food_name =form.food_name.value;
+      const pickup_location = form.pickup_location.value;
+      const food_quantity = form.food_quantity.value;
+    //   const origin = form.origin.value;
+      const additional_notes = form.additional_notes.value;
+    //   const price = form.price.value;
 
-      const updateFood = {foodName, foodCategory, quantity, origin, description, price};
+      const updateFood = {food_name, pickup_location, food_quantity,  additional_notes,};
 
       console.log(updateFood);
 
@@ -48,6 +48,7 @@ const UpdateFoodModal = () => {
       .then(res => res.json())
       .then(data => {
           console.log(data);
+          form.reset();
           if(data.modifiedCount > 0){
               Swal.fire({
                   icon: 'success',
@@ -69,24 +70,24 @@ const UpdateFoodModal = () => {
                     <label className="label">
                         <span className="label-text">Food Name</span>
                     </label>
-                    <input name='name' type="text" placeholder="Food name" className="input input-bordered" defaultValue={foodName} required />
+                    <input name='food_name' type="text" placeholder="Food name" className="input input-bordered" defaultValue={food_name} required />
                 </div>
                 <div className="lg:flex gap-5 ">
                     <div className="form-control lg:w-1/2">
                         <label className="label">
-                            <span className="label-text">Food Category</span>
+                            <span className="label-text">Pick Up Location</span>
                         </label>
-                        <input name='category' type="text" placeholder="Food category" defaultValue={foodCategory} className="input input-bordered" required />
+                        <input name='pickup_location' type="text" placeholder="Food category" defaultValue={pickup_location} className="input input-bordered" required />
                     </div>
                     <div className="form-control lg:w-1/2">
                         <label className="label">
-                            <span className="label-text">Quantity</span>
+                            <span className="label-text">Food Quantity</span>
                         </label>
-                        <input name='quantity' type="number" placeholder="Quantity" defaultValue={quantity} className="input input-bordered" required />
+                        <input name='food_quantity' type="number" placeholder="Quantity" defaultValue={food_quantity} className="input input-bordered" required />
                     </div>
                 </div>
 
-                <div className="lg:flex gap-5 ">
+                {/* <div className="lg:flex gap-5 ">
                     <div className="form-control lg:w-1/2">
                         <label className="label">
                             <span className="label-text">Food Origin(Country)</span>
@@ -99,13 +100,13 @@ const UpdateFoodModal = () => {
                         </label>
                         <input name='price' type="text" placeholder="price" defaultValue={price} className="input input-bordered" required />
                     </div>
-                </div>
+                </div> */}
 
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Description</span>
+                        <span className="label-text">Additional Note</span>
                     </label>
-                    <input name='description' type="text" placeholder="Food Description" defaultValue={description} className="input input-bordered" required />
+                    <input name='additional_notes' type="text" placeholder="Food Description" defaultValue={additional_notes} className="input input-bordered" required />
                 </div>
 
                 <input className="btn btn-primary my-4 capitalize" type="submit" value="Update Info" />

@@ -27,7 +27,7 @@ const FoodDetails = () => {
         setFood(one);
       });
   }, [id]);
-
+console.log(food)
   
 
   const onSubmit = async (e) => {
@@ -35,6 +35,7 @@ const FoodDetails = () => {
     try {
       setLoading(true)
       const form = e.target;
+      const FoodId= form.foodId.value
       const foodName = form.foodName.value
       const foodImage = form.foodImage.value
       const foodQuantity = form.foodQuantity.value
@@ -47,7 +48,7 @@ const FoodDetails = () => {
       const foodDonatorImage = form.foodDonatorImage.value
       const requestDate = form.requestDate.value
 
-      const data = {foodName,requestDate, foodImage, foodQuantity, pickupLocation, expireDate, additionalNotes, foodStatus, foodDonatorName, foodDonatorEmail, foodDonatorImage}
+      const data = {FoodId,foodName,requestDate, foodImage, foodQuantity, pickupLocation, expireDate, additionalNotes, foodStatus, foodDonatorName, foodDonatorEmail, foodDonatorImage}
       
       const {data: savedInfo}  = await axios.post('http://localhost:5000/request', data)
       const {data: deletdInfo}  = await axios.delete(`http://localhost:5000/food/${food._id}`)
@@ -85,6 +86,8 @@ const FoodDetails = () => {
             <h1 className="text-5xl font-bold">{food?.food_name}</h1>
             <p className="py-6">Quantity: {food?.food_quantity}</p>
             <p className="py-6">Expired: {food?.expired_datetime}</p>
+            <p className="py-6">Donar: {food?.donator?.name}</p>
+            <p className="py-6">Locations: {food?.pickup_location}</p>
             <button
               className="btn btn-outline btn-warning"
               onClick={() => document.getElementById("my_modal_3").showModal()}
@@ -105,6 +108,18 @@ const FoodDetails = () => {
                     ✕
                   </button>
                   {/* register your input into the hook by invoking the "register" function */}
+                  <div>
+                    <label className="label">
+                      <span className="label-text text-lg ">Food Id</span>
+                    </label>
+                    <input
+                      value={food?._id}
+                      name="foodId"
+                      disabled
+                      className="input input-bordered w-full outline text-yellow-600 font-bold"
+                    />
+                    
+                  </div>
                   <div>
                     <label className="label">
                       <span className="label-text text-lg ">Food Name</span>

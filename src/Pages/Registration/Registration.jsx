@@ -143,7 +143,7 @@ const Registration = () => {
                   </div>
                   <div className="form-control mt-6">
                     <button className="btn text-white border-none bg-[#FF3811]">
-                      Login
+                      Register
                     </button>
                     {error && <p className="text-red-600 pt-4">{error}</p>}
                     {success && <p>{success}</p>}

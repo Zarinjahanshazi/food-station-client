@@ -11,6 +11,8 @@ const Footer = () => {
             Providing fresh food since 2024
           </p>
           <p>Copyright © 2024 - All right reserved</p>
+          <p>Contact:01982345333</p>
+          <p>Address:89/8 motijheel,Dhaka</p>
         </aside>
         <nav>
           <div className="grid grid-flow-col gap-4">

@@ -1,7 +1,7 @@
 const Purpose = () => {
     return (
       <div className="my-20 mx-10">
-        <div className="flex justify-around gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
           <div className="  p-10 hover:bg-black">
             <h3 className="text-xl  text-yellow-500   font-thin">
               WHY IS PREVENTION OF FOOD WASTE IMPORTANT

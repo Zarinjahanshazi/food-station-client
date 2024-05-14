@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 // import axios from "axios";
 
 const AddFood = () => {
@@ -39,6 +40,7 @@ const AddFood = () => {
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData); // Log the response from the backend
+        toast.success("Food Added Successfully!")
         reset(); // Reset the form
       } else {
         console.error("Failed to add food");
