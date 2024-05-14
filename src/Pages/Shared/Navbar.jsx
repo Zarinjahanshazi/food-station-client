@@ -94,10 +94,13 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link>
+          <div>
+            <Link>
+          
             <img className="h-[80px] rounded-full" src={logo} alt="" />
             {/* <h2 className="text-xl font-semibold text-orange-500 hidden md:block">Bangla Bites</h2> */}
           </Link>
+          </div>
           {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
         </div>
         <div className="navbar-center hidden lg:flex">
