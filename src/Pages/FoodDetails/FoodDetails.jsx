@@ -20,7 +20,7 @@ const FoodDetails = () => {
   const navigate = useNavigate();
   // const [success, setSuccess] = useState("");
   useEffect(() => {
-    fetch("http://localhost:5000/food")
+    fetch("https://food-station-server.vercel.app/food")
       .then((res) => res.json())
       .then((data) => {
         const one = data.find((f) => f._id === id);
@@ -50,8 +50,8 @@ console.log(food)
 
       const data = {FoodId,foodName,requestDate, foodImage, foodQuantity, pickupLocation, expireDate, additionalNotes, foodStatus, foodDonatorName, foodDonatorEmail, foodDonatorImage}
       
-      const {data: savedInfo}  = await axios.post('http://localhost:5000/request', data)
-      const {data: deletdInfo}  = await axios.delete(`http://localhost:5000/food/${food._id}`)
+      const {data: savedInfo}  = await axios.post('https://food-station-server.vercel.app/request', data)
+      const {data: deletdInfo}  = await axios.delete(`https://food-station-server.vercel.app/food/${food._id}`)
       navigate('/foodRequest')
 
       toast.success('Food add to the request successfully.')

@@ -9,7 +9,7 @@ const UpdateFoodModal = () => {
   const [load, setLoad] = useState(true);
 
   useEffect(() => {
-      fetch('http://localhost:5000/food')
+      fetch('https://food-station-server.vercel.app/food')
           .then(res => res.json())
           .then(data => {
               const one = data.find(f => f._id === id);
@@ -38,7 +38,7 @@ const UpdateFoodModal = () => {
 
       console.log(updateFood);
 
-      fetch(`http://localhost:5000/food/${_id}`,{
+      fetch(`https://food-station-server.vercel.app/food/${_id}`,{
           method: 'PUT',
           headers: {
               'content-type':'application/json'

@@ -44,7 +44,7 @@ const Registration = () => {
         console.log(result.user);
         const user = { email, password, name, photo };
         console.log(user);
-        fetch("http://localhost:5000/users", {
+        fetch("https://food-station-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

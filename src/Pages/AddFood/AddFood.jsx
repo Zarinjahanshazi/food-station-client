@@ -30,7 +30,7 @@ const AddFood = () => {
         image: data.image,
       };
       console.log(formattedData);
-      const response = await fetch("http://localhost:5000/food", {
+      const response = await fetch("https://food-station-server.vercel.app/food", {
         method: "POST",
         headers: {
           "content-type": "application/json",

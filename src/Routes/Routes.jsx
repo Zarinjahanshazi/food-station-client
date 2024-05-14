@@ -32,13 +32,13 @@ const router = createBrowserRouter([
       {
         path: "/availableFood",
         element: <AvailableFoods />,
-        loader: () => fetch("http://localhost:5000/food"),
+        loader: () => fetch("https://food-station-server.vercel.app/food"),
       },
       {
         path: "/food/:id",
         element:<PrivateRoute> <FoodDetails /> </PrivateRoute>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/food/${params.id}`),
+          fetch(`https://food-station-server.vercel.app/food/${params.id}`,{credentials:"include"}),
       },
 
       {
@@ -57,13 +57,13 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         // loader: ({ params }) =>
-        //   fetch(`http://localhost:5000/food?email=${params.email}`),
+        //   fetch(`https://food-station-server.vercel.app/food?email=${params.email}`),
       },
       {
         path: "/updateFoodModal/:id",
         element:<PrivateRoute> <UpdateFoodModal></UpdateFoodModal> </PrivateRoute>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/food/${params.id}`),
+          fetch(`https://food-station-server.vercel.app/food/${params.id}`),
       },
       {
         path: "/addFood",

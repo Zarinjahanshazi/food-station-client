@@ -36,23 +36,18 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+    const userEmail = currentUser?.email || user?.email;
+            const loggedUser ={email:userEmail};
+            setUser(currentUser);
+            // console.log('current user', currentUser);
+            setLoading(false);
 
       if (currentUser) {
-        const displayName = currentUser.displayName;
-        const email = currentUser.email;
-        const photoURL = currentUser.photoURL;
-
-        setUser({
-          email,
-          displayName,
-          photoURL,
-        });
-        axios
+       axios
           .post(
-            "http://localhost:5000/jwt",
-            { email, displayName, photoURL },
+            "https://food-station-server.vercel.app/jwt",loggedUser,
+            
             {
               withCredentials: true,
             }
@@ -61,11 +56,17 @@ const AuthProvider = ({ children }) => {
             console.log("token", res.data);
           });
       } else {
-        setUser(null);
+        axios.post('https://food-station-server.vercel.app/logout',loggedUser,{
+          withCredentials:true
+      })
+      .then(res => {
+          console.log(res.data);
+      })
       }
     });
-    return unsubscribe;
-  }, []);
+
+    return () => unsubscribe();
+  }, [user]);
   const userInfo = {
     user,
     createUser,
