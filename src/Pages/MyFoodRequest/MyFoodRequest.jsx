@@ -11,10 +11,10 @@ const MyFoodRequest = () => {
   const [request, setRequest] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/food?email=${user.email}`)
+    fetch(`http://localhost:5000/request/${user.email}`)
       .then((res) => res.json())
       .then((data) => setRequest(data));
-  }, []);
+  }, [user]);
 
   return (
     <div>
@@ -29,11 +29,12 @@ const MyFoodRequest = () => {
               <tr>
                 <th>Food Name</th>
                 <th>Email</th>
-                <th>Name</th>
+                <th>Donar Name</th>
                 <th>Status</th>
                 <th>Quantity</th>
                 <th>Pickup Location</th>
-                <th>Date</th>
+                <th>Expire Date</th>
+                <th>Request Date</th>
                 <th>Additional Notes</th>
               </tr>
             </thead>
