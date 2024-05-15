@@ -1,28 +1,29 @@
 
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useEffect, useState } from "react";
+import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateFoodModal = () => {
-  const {id} = useParams();
-  const [food, setFood] = useState(null);
-  const [load, setLoad] = useState(true);
+//   const {id} = useParams();
+//   const [food, setFood] = useState(null);
+//   const [load, setLoad] = useState(true);
+  const newFood = useLoaderData()
 
-  useEffect(() => {
-      fetch('https://food-station-server.vercel.app/food')
-          .then(res => res.json())
-          .then(data => {
-              const one = data.find(f => f._id === id);
-              setFood(one);
-              setLoad(false);
-          })
-          .catch(error => {
-              // Handle any network or fetch errors here
-              console.error("Error fetching food data:", error);
-          });
-  }, [id]);
+//   useEffect(() => {
+//       fetch('https://food-station-server.vercel.app/food')
+//           .then(res => res.json())
+//           .then(data => {
+//               const one = data.find(f => f._id === id);
+//               setFood(one);
+//               setLoad(false);
+//           })
+//           .catch(error => {
+//               // Handle any network or fetch errors here
+//               console.error("Error fetching food data:", error);
+//           });
+//   }, [id]);
   //console.log(food);
-  const {_id,food_name, pickup_location, food_quantity, additional_notes, } = food || [];
+  const {_id,food_name, pickup_location, food_quantity, additional_notes, } = newFood;
 
   const handleUpdate = e => {
       e.preventDefault();
@@ -63,7 +64,7 @@ const UpdateFoodModal = () => {
   return (
     <div>
        {
-                food? (
+                newFood? (
                     <form onSubmit={handleUpdate} className="card-body w-1/2 mx-auto bg-white shadow-2xl rounded-xl">
                 <h1 className='text-center text-3xl font-bold'>Update a Food Item</h1>
                 <div className="form-control">

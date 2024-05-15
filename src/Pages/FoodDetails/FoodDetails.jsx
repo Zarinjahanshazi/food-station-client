@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm  } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
@@ -13,21 +13,22 @@ const FoodDetails = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  //   const { data } = useLoaderData();
-  const { id } = useParams();
-  const [food, setFood] = useState(null);
+    const food  = useLoaderData();
+    console.log(food);
+  // const { id } = useParams();
+  // const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   // const [success, setSuccess] = useState("");
-  useEffect(() => {
-    fetch("https://food-station-server.vercel.app/food")
-      .then((res) => res.json())
-      .then((data) => {
-        const one = data.find((f) => f._id === id);
-        setFood(one);
-      });
-  }, [id]);
-console.log(food)
+//   useEffect(() => {
+//     fetch("https://food-station-server.vercel.app/food")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const one = data.find((f) => f._id === id);
+//         setFood(one);
+//       });
+//   }, [id]);
+// console.log(data)
   
 
   const onSubmit = async (e) => {
@@ -79,7 +80,7 @@ console.log(food)
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
-            src={food?.food_image}
+            src={food ?.food_image}
             className="max-w-sm rounded-lg shadow-2xl"
           />
           <div>

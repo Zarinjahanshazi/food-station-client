@@ -4,6 +4,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const AvailableFoods = () => {
   const data = useLoaderData();
+  console.log(data);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortedData, setSortedData] = useState([...data]);
   const [sortBy, setSortBy] = useState(null);
