@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
-
+  console.log(user);
   const {
     register,
     handleSubmit,
@@ -101,9 +101,9 @@ const AddFood = () => {
           <label className="label">
             <span className="label-text text-lg text-white">Expired Date</span>
           </label>
-          <input
-            className="input input-bordered w-full outline text-yellow-600 font-bold"
-            {...register("expired_date", { required: true })}
+         
+          <input className="input input-bordered w-full outline text-yellow-600 font-bold" type="date" id="start" name="trip-start" defaultValue="2018-07-22" min="2018-01-01" max="2018-12-31" 
+          {...register("expired_date", { required: true })}
           />
         </div>
         <div>
@@ -133,7 +133,7 @@ const AddFood = () => {
             <span className="label-text text-lg text-white">Donator Name</span>
           </label>
           <input
-            defaultValue={user?.displayName}
+            defaultValue={user.displayName}
             className="input input-bordered w-full outline text-yellow-600 font-bold"
             {...register("name", { required: true })}
           />

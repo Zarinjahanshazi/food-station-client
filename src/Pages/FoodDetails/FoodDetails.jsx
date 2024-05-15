@@ -87,7 +87,7 @@ const FoodDetails = () => {
             <h1 className="text-5xl font-bold">{food?.food_name}</h1>
             <p className="py-6">Quantity: {food?.food_quantity}</p>
             <p className="py-6">Expired: {food?.expired_datetime}</p>
-            <p className="py-6">Donar: {food?.donator?.name}</p>
+            <p className="py-6">Donar: {food.name}</p>
             <p className="py-6">Locations: {food?.pickup_location}</p>
             <button
               className="btn btn-outline btn-warning"

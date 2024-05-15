@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import Meta from "../Shared/Meta";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
+import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Registration = () => {
   const { createUser } = useContext(AuthContext);
@@ -38,37 +40,27 @@ const Registration = () => {
       setError("Your PassWord should have at least one special charecter");
       return;
     }
-
     createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        const user = { email, password, name, photo };
-        console.log(user);
-        fetch("https://food-station-server.vercel.app/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            setSuccess("User created successfully!");
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Registration Successful",
-              showConfirmButton: false,
-              timer: 3000,
-            });
-            navigate("/");
-          });
+    .then((result) => {
+      console.log(result);
+      updateProfile(result.user, {
+        displayName: name,
+        photoURL:photo,
       })
-      .catch((error) => {
-        console.log(error);
-        setError(error.message);
-      });
+        .then(() => {
+          console.log("success")
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+      // toast.success("User Created Successfully!");
+      e.target.reset();
+    })
+    .catch((error) => {
+      console.log(error);
+      // toast.error("User already added!");
+    });
+    
   };
 
   return (

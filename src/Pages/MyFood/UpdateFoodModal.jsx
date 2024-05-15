@@ -4,10 +4,12 @@ import { useLoaderData, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateFoodModal = () => {
-//   const {id} = useParams();
+  const {id} = useParams();
+  console.log(id)
 //   const [food, setFood] = useState(null);
 //   const [load, setLoad] = useState(true);
-  const newFood = useLoaderData()
+  const newFood = useLoaderData();
+  console.log(newFood);
 
 //   useEffect(() => {
 //       fetch('https://food-station-server.vercel.app/food')
@@ -48,8 +50,10 @@ const UpdateFoodModal = () => {
       })
       .then(res => res.json())
       .then(data => {
+       
+        
           console.log(data);
-          form.reset();
+         
           if(data.modifiedCount > 0){
               Swal.fire({
                   icon: 'success',
@@ -58,7 +62,14 @@ const UpdateFoodModal = () => {
                   timer: 1500
                 })
           }
+          else{
+            console.error('updateFailed')
+          }
+          form.reset();
+
+          
       })
+    
     }
 
   return (
@@ -111,6 +122,7 @@ const UpdateFoodModal = () => {
                 </div>
 
                 <input className="btn btn-primary my-4 capitalize" type="submit" value="Update Info" />
+                
             </form>
                 ) :
                 (

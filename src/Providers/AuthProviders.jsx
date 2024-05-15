@@ -6,7 +6,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import axios from "axios";
+
 import auth from "../Firebase/firebase.config";
 
 export const AuthContext = createContext();
@@ -37,36 +37,17 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-    const userEmail = currentUser?.email || user?.email;
-            const loggedUser ={email:userEmail};
+    // const userEmail = currentUser?.email || user?.email;
+            // const loggedUser ={email:userEmail};
             setUser(currentUser);
             // console.log('current user', currentUser);
             setLoading(false);
 
-      if (currentUser) {
-       axios
-          .post(
-            "https://food-station-server.vercel.app/jwt",loggedUser,
-            
-            {
-              withCredentials: true,
-            }
-          )
-          .then((res) => {
-            console.log("token", res.data);
-          });
-      } else {
-        axios.post('https://food-station-server.vercel.app/logout',loggedUser,{
-          withCredentials:true
-      })
-      .then(res => {
-          console.log(res.data);
-      })
-      }
+      
     });
 
     return () => unsubscribe();
-  }, [user]);
+  }, []);
   const userInfo = {
     user,
     createUser,

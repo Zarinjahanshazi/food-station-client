@@ -5,10 +5,15 @@ import { Link } from "react-router-dom";
 const FeaturedFoods = () => {
   const [food, setFood] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/myFood")
+    fetch("https://food-station-server.vercel.app/food")
       .then((res) => res.json())
       .then((data) => setFood(data));
+      
+      
+      
   }, []);
+
+  // console.log(data)
 
   // Function to sort data by food_quantity and return the highest 20 items
   const getHighestQuantityFoods = () => {
@@ -27,7 +32,7 @@ const FeaturedFoods = () => {
         Featured Foods
       </h2>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {highestQuantityFoods.map((item) => (
+        {food.map((item) => (
           <div
             className="border border-yellow-500 rounded shadow"
             key={item.food_name}
@@ -35,10 +40,10 @@ const FeaturedFoods = () => {
             <img src={item.food_image} alt={item.food_name} />
             <h2 className="text-xl text-center">{item.food_name}</h2>
             <div className="flex gap-4 justify-around items-center">
-              <p>Donator: {item?.donator?.name}</p>
+              {/* <p>Donator: {item.name}</p> */}
               <img
                 className="w-12 h-12 rounded-full"
-                src={item?.donator?.image}
+                src={item.image}
                 alt=""
               />
             </div>

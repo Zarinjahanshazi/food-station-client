@@ -10,12 +10,15 @@ const MyFoodRequest = () => {
   // console.log(data);
   const { user } = useContext(AuthContext);
   const [request, setRequest] = useState([]);
+  console.log(user.email);
 
   useEffect(() => {
-    fetch(`https://food-station-server.vercel.app/food?email=${user.email}`,{credentials:"include"})
+    fetch(`https://food-station-server.vercel.app/food/${user.email}`)
       .then((res) => res.json())
       .then((data) => setRequest(data));
+      
   }, [user.email]);
+  console.log(request)
 
   return (
     <div>

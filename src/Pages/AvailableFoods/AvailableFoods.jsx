@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
+import {AuthContext} from "../../Providers/AuthProviders"
+
+
 
 const AvailableFoods = () => {
   const data = useLoaderData();
-  console.log(data);
+  const {user} = useContext(AuthContext)
+  console.log(user)
+  
+ 
   const [searchTerm, setSearchTerm] = useState("");
   const [sortedData, setSortedData] = useState([...data]);
   const [sortBy, setSortBy] = useState(null);
@@ -124,10 +130,10 @@ const AvailableFoods = () => {
             <img src={item.food_image} alt={item.food_name} />
             <h2 className="text-xl text-center">{item.food_name}</h2>
             <div className="flex gap-4 justify-around items-center">
-              <p>Donator: {item?.donator?.name}</p>
+              <p>Donator: {item.name}</p>
               <img
                 className="w-12 h-12 rounded-full"
-                src={item?.donator?.image}
+                src={item.image}
                 alt=""
               />
             </div>
