@@ -38,6 +38,11 @@ const Navbar = () => {
           Food Request
         </NavLink>
       </li>
+      <li>
+        <NavLink className="text-yellow-400 font-bold" to="/about">
+          About
+        </NavLink>
+      </li>
       {user?.email ? (
         <li>
           {" "}
